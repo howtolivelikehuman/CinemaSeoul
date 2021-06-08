@@ -50,6 +50,7 @@ mybatis:
 
 #로그확인, 로그 청소
 #journalctl -u server_start.service
+#journalctl --flush --rotate
 #journalctl --vacuum-time=1s
 
 #sudo systemctl daemon-reload

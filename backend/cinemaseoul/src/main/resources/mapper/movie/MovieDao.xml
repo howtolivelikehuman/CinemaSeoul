@@ -251,9 +251,10 @@
     <update id="updateMovieImage" parameterType="MovieVo">
         UPDATE MOVIE M SET M.IMAGE =
         <choose>
-            <when test= "image != NULL"> #{image, jdbcType=BLOB} </when>
+            <when test= "image != null"> #{image, jdbcType=BLOB} </when>
             <otherwise> empty_blob() </otherwise>
         </choose>
+        WHERE MOVI_ID = #{movi_id}
     </update>
 
     <!--[영화 삭제]-->

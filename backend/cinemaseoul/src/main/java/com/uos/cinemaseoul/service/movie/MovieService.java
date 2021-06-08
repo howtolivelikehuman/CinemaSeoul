@@ -78,8 +78,9 @@ public class MovieService {
     //이미지 업데이트
     @Transactional
     public void updateMovieImage(MovieVo movieVo) {
-        if(movieDao.updateMovieImage(movieVo) != 1){
-            throw new WrongArgException("too much");
+        int imageupdate = movieDao.updateMovieImage(movieVo);
+        if(imageupdate > 1){
+            throw new WrongArgException(imageupdate + " number updated");
         }
     }
 

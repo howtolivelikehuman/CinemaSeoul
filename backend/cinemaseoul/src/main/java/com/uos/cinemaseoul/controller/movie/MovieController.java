@@ -55,17 +55,15 @@ public class MovieController {
         movieService.updateMovie(uMDto);
     }
 
-    @RequestMapping(name ="/image/{movi_id}", method = RequestMethod.PUT, consumes = "multipart/form-data")
+    @RequestMapping(value ="/image/{movi_id}", method = RequestMethod.PUT, consumes = "multipart/form-data")
     public void updateMovieImage(@PathVariable(name = "movi_id") int movi_id,
-                                 @RequestPart("image") MultipartFile image) throws IOException {
-        MovieVo movieVo;
+                                 @RequestPart(name = "image", required = false) MultipartFile image) throws IOException {
+        MovieVo movieVo = new MovieVo();
 
         if(image != null){
-            movieVo = MovieVo.builder().movi_id(movi_id).image(image.getBytes()).build();
-        }else{
-            movieVo = MovieVo.builder().movi_id(movi_id).build();
+            movieVo.setImage(image.getBytes());
         }
-
+        movieVo.setMovi_id(movi_id);
         movieService.updateMovieImage(movieVo);
     }
 

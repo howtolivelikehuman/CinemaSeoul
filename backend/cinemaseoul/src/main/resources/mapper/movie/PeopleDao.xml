@@ -82,6 +82,7 @@
             <when test= "image != NULL"> #{image, jdbcType=BLOB} </when>
             <otherwise> empty_blob() </otherwise>
         </choose>
+        WHERE PEOP_ID = #{peop_id}
     </update>
 
 </mapper>

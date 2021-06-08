@@ -32,6 +32,7 @@
             <when test= "image != NULL"> #{image, jdbcType=BLOB} </when>
             <otherwise> empty_blob() </otherwise>
         </choose>
+        WHERE EVENT_ID = #{event_id}
     </update>
 
     <delete id="deleteEvent">
