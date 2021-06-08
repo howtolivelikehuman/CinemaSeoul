@@ -11,6 +11,8 @@ import java.util.List;
 @Mapper
 public interface ReviewDao {
 
+    ReviewVo selectReview(int user_id, int movi_id);
+
     //관람평 작성
     void insertReview(ReviewVo vo);
 
@@ -29,5 +31,6 @@ public interface ReviewDao {
     //영화 숫자 받아와서 0으로만들기
     int getCount(int movi_id);
     void updateMovieRatingToZero(int movi_id);
+
 
 }

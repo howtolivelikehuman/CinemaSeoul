@@ -6,31 +6,27 @@
 <mapper namespace="com.uos.cinemaseoul.dao.movie.PeopleDao">
 
 
-    <!-- [인물명 검색}-->
+    <!-- [인물을 검색한다.]-->
     <select id="searchPeople" resultType="PeopleInfoDto">
         SELECT PEOP_ID, PEOP_NAME FROM PEOPLE P
         <if test="name != null"> WHERE PEOP_NAME LIKE #{name}</if>
     </select>
-
-    <!-- [인물 세부 조회}-->
+    <!-- [인물의 세부 정보를 조회한다.]-->
     <select id="getPeople" resultType="PeopleDetailDto">
         SELECT PEOP_ID, PEOP_NAME, BIRTH, NATION, PEOP_CONTENTS, IMAGE
         FROM PEOPLE P
         WHERE P.PEOP_ID = #{peop_id}
     </select>
-
     <select id="getCastMovies" resultType="CastingMovieDto">
         SELECT M.MOVI_ID, M.MOVI_NAME
         FROM MOVIE M
         LEFT OUTER JOIN CAST C on M.MOVI_ID = C.MOVI_ID
         WHERE C.PEOP_ID = #{peop_id}
     </select>
-
-    <!-- [인물 리스트 조회}-->
+    <!-- [인물 목록을 조회한다.]-->
     <select id="countList" resultType="Integer">
         SELECT COUNT(PEOP_ID) FROM PEOPLE
     </select>
-
     <select id="getPeopleList" resultType="PeopleInfoDto">
         SELECT B.PEOP_ID, B.PEOP_NAME
         FROM (
@@ -43,7 +39,7 @@
         WHERE B.RNUM > (#{page}-1)*#{amount} ]]>
     </select>
 
-    <!--[인물 삽입]-->
+    <!--[인물을 등록한다.]-->
     <insert id="insertPeople" parameterType="PeopleVo">
         INSERT INTO PEOPLE (PEOP_ID, PEOP_NAME, NATION, BIRTH, PEOP_CONTENTS, IMAGE)
         VALUES (SEQ_PEOPLE.nextval, #{peop_name}, #{nation}, #{birth}, #{peop_contents},
@@ -59,7 +55,7 @@
         DELETE PEOPLE WHERE PEOP_ID = #{peop_id}
     </delete>
 
-    <!--[인물 수정]-->
+    <!--[인물의 정보를 수정한다.]-->
     <update id="updatePeople" parameterType="PeopleVo">
         UPDATE PEOPLE SET
                           PEOP_NAME = #{peop_name},
@@ -69,7 +65,7 @@
         WHERE PEOP_ID = #{peop_id}
     </update>
 
-    <!-- Casting에서도 다 수정-->
+    <!-- 출연진에서도 다 수정-->
     <update id="updateCasting" parameterType="PeopleVo">
         UPDATE CAST SET PEOP_NAME = #{peop_name}
         WHERE PEOP_ID = #{peop_id}

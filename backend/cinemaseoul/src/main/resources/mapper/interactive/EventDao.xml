@@ -49,7 +49,7 @@
                  SELECT /*+index_desc(IDX_EVENT_PK)*/ ROWNUM AS RNUM,
                                                        A.EVENT_ID, A.ADMI_NAME, A.EVENT_TITLE, A.CREA_DATETIME
                  FROM(
-                         SELECT E.EVENT_ID, E.ADMI_NAME, E.EVENT_TITLE, E.CREA_DATETIME FROM EVENT E
+                         SELECT E.EVENT_ID, SUBSTR(E.ADMI_NAME,1,1)||'**' AS ADMI_NAME, E.EVENT_TITLE, E.CREA_DATETIME FROM EVENT E
 
                          ORDER BY E.EVENT_ID DESC) A
         <![CDATA[ WHERE ROWNUM <= #{page}*#{amount}) B
@@ -58,7 +58,7 @@
     </select>
 
     <select id="selectEvent" resultType="EventVo">
-        SELECT EVENT_ID, ADMI_ID, ADMI_NAME, EVENT_TITLE, EVENT_CONTENTS, CREA_DATETIME FROM EVENT
+        SELECT EVENT_ID, ADMI_ID,SUBSTR(ADMI_NAME,1,1)||'**' AS ADMI_NAME, EVENT_TITLE, EVENT_CONTENTS, CREA_DATETIME FROM EVENT
         WHERE EVENT_ID = #{event_id}
     </select>
 

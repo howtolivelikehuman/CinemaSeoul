@@ -36,7 +36,7 @@
             SELECT /*+index_desc(IDX_NOTICE_PK)*/ ROWNUM AS RNUM,
                    A.NOTI_ID, A.ADMI_NAME, A.NOTI_TITLE, A.CREA_DATETIME
             FROM(
-                SELECT N.NOTI_ID, N.ADMI_NAME, N.NOTI_TITLE, N.CREA_DATETIME FROM NOTICE N
+                SELECT N.NOTI_ID, SUBSTR(N.ADMI_NAME,1,1)||'**' AS ADMI_NAME, N.NOTI_TITLE, N.CREA_DATETIME FROM NOTICE N
 
                 ORDER BY N.NOTI_ID DESC) A
         <![CDATA[ WHERE ROWNUM <= #{page}*#{amount}) B
@@ -45,7 +45,7 @@
     </select>
 
     <select id="selectNotice" resultType="NoticeVo">
-        SELECT NOTI_ID, ADMI_ID, ADMI_NAME, NOTI_TITLE, NOTI_CONTENTS, CREA_DATETIME FROM NOTICE
+        SELECT NOTI_ID, ADMI_ID, SUBSTR(ADMI_NAME,1,1)||'**' AS ADMI_NAME, NOTI_TITLE, NOTI_CONTENTS, CREA_DATETIME FROM NOTICE
         WHERE NOTI_ID = #{noti_id}
     </select>
 

@@ -3,20 +3,17 @@ package com.uos.cinemaseoul.service.movie;
 import com.uos.cinemaseoul.common.mapper.MovieMapper;
 import com.uos.cinemaseoul.common.paging.MovieCriteria;
 import com.uos.cinemaseoul.common.paging.MovieSearchCriteria;
+import com.uos.cinemaseoul.common.paging.ReviewCriteria;
 import com.uos.cinemaseoul.dao.movie.MovieDao;
 import com.uos.cinemaseoul.dto.movie.*;
 import com.uos.cinemaseoul.exception.NotFoundException;
 import com.uos.cinemaseoul.exception.WrongArgException;
 import com.uos.cinemaseoul.vo.movie.MovieVo;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.HashMap;
 
 @Service
@@ -151,4 +148,18 @@ public class MovieService {
     }
 
 
+    public MovieReviewListDto getReview(ReviewCriteria reviewCriteria) {
+        MovieReviewListDto movieReviewListDto = new MovieReviewListDto();
+        reviewCriteria.setAmount(20);
+        //페이지 계산
+        int totalCount = movieDao.countReviewList(reviewCriteria);
+        int totalPage =  totalCount / reviewCriteria.getAmount();
+        if(totalCount % reviewCriteria.getAmount() > 0){
+            totalPage++;
+        }
+
+        movieReviewListDto.setReviews(movieDao.selectReviewList(reviewCriteria));
+        movieReviewListDto.setPageInfo(totalPage, reviewCriteria.getPage(), reviewCriteria.getAmount());
+        return movieReviewListDto;
+    }
 }

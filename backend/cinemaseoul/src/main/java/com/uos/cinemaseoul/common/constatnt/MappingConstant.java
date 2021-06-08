@@ -24,6 +24,7 @@ public class MappingConstant {
             "/movie/search",
             "/movie/list",
             "/movie/genre/list",
+            "/movie/review",
 
             "/show/list",
 

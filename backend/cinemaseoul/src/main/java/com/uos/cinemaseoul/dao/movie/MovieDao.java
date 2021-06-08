@@ -2,8 +2,10 @@ package com.uos.cinemaseoul.dao.movie;
 
 import com.uos.cinemaseoul.common.paging.MovieCriteria;
 import com.uos.cinemaseoul.common.paging.MovieSearchCriteria;
+import com.uos.cinemaseoul.common.paging.ReviewCriteria;
 import com.uos.cinemaseoul.dto.movie.CastingInfoDto;
 import com.uos.cinemaseoul.dto.movie.MovieListInfoDto;
+import com.uos.cinemaseoul.dto.movie.ReviewShortDto;
 import com.uos.cinemaseoul.dto.movie.SelectMovieDto;
 import com.uos.cinemaseoul.vo.movie.MovieVo;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,8 +37,12 @@ public interface MovieDao {
     List<MovieListInfoDto> selectMovieList(MovieCriteria movieCriteria);
 
 
+    int countReviewList(ReviewCriteria reviewCriteria);
+    List<ReviewShortDto> selectReviewList(ReviewCriteria reviewCriteria);
+
     int countSearchList(MovieSearchCriteria movieSearchCriteria);
     List<MovieListInfoDto> searchMovie(MovieSearchCriteria movieSearchCriteria);
+
 
 
 }

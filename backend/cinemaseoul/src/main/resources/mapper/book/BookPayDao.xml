@@ -15,7 +15,6 @@
         INSERT INTO BOOKPAY (BOOK_PAY_ID, USER_ID, USE_POINT, PRICE, PAY_TYPE_CODE, ACCU_POINT, USE_CODE)
             VALUES ( #{book_pay_id}, #{user_id}, #{use_point}, #{price}, #{pay_type_code}, #{accu_point}, #{use_code})
     </insert>
-
     <!-- 예매 INSERT -->
     <insert id="insertBook" parameterType="BookVo">
         <selectKey keyProperty="book_id" resultType="int" order="BEFORE">
@@ -29,7 +28,6 @@
         #{book_id}, #{user_id}, #{show_id}, #{book_pay_id},
           #{teen}, #{adult}, #{senior}, #{impaired})
     </insert>
-
     <!--좌석 INSERT -->
     <update id="insertBookSeats" parameterType="hashmap">
         INSERT ALL
@@ -40,31 +38,30 @@
         SELECT * FROM DUAL
     </update>
 
-    <!--[사용 취소]-->
+
+    <!--[예매를 취소한다.]-->
+    <!--취소를 위한 정보-->
     <select id="getCancelInfo" resultType="BookPayVo">
         SELECT BP.BOOK_PAY_ID, BP.USER_ID, BP.ACCU_POINT, BP.PAY_STATE_CODE, BP.USE_POINT FROM BOOKPAY BP
         WHERE BP.BOOK_PAY_ID = #{book_id}
     </select>
-
-
     <update id="setCancel">
         UPDATE BOOKPAY SET PAY_STATE_CODE = #{pay_state_cancel}
         WHERE BOOK_PAY_ID = #{book_pay_id}
     </update>
 
-    <!--[코드 사용]-->
+    <!--[예매 코드를 사용한다.]-->
     <select id="selectBookPay" resultType="BookPayVo">
         SELECT BOOK_PAY_ID, USE_CODE, USE_DATETIME, PAY_STATE_CODE FROM BOOKPAY
         WHERE USE_CODE = #{use_code}
     </select>
-
     <update id="useCode" parameterType="String">
         UPDATE BOOKPAY SET PAY_STATE_CODE = #{pay_state_fin},
                               USE_DATETIME = SYSDATE
         WHERE USE_CODE = #{use_code}
     </update>
 
-    <!--[예매 결제 조회]-->
+    <!--[예매의 결제정보를 확인한다.]-->
     <select id="countList" parameterType="PayListCriteria" resultType="Integer">
         SELECT COUNT(BOOK_PAY_ID) FROM BOOKPAY B
         <trim prefix="WHERE" prefixOverrides="AND">

@@ -20,7 +20,7 @@
         <result property="accu_audience" column="ACCU_AUDIENCE"/>
     </resultMap>
 
-    <!-- [영화 세부조회] -->
+    <!-- [영화의 세부내용을 조회한다.] -->
     <!--영화 조회-->
     <select id="selectMovie"  resultMap="movieInfo">
         SELECT M.MOVI_ID, M.MOVI_NAME,
@@ -43,12 +43,11 @@
     </select>
 
 
-    <!-- [영화 리스트 조회] -->
+    <!-- [영화의 목록을 조회한다.] -->
     <!-- 전체 영화 수 조회 -->
     <select id="countList" parameterType="MovieCriteria" resultType="Integer">
         SELECT COUNT(MOVI_ID) FROM MOVIE M
             <trim prefix="WHERE" prefixOverrides="AND">
-
                 <choose>
                     <!--개봉 중-->
                     <when test="stat == 1"><![CDATA[
@@ -85,7 +84,6 @@
                 </if>
             </trim>
     </select>
-
     <!--영화 리스트 조회(페이지)-->
     <select id="selectMovieList" parameterType="MovieCriteria" resultType="MovieListInfoDto">
         SELECT B.RNUM, B.MOVI_ID, B.MOVI_NAME, B.AVAI_AGE, B.OPEN_DATE, B.RATING, B.ACCU_AUDIENCE, B.IMAGE
@@ -153,8 +151,6 @@
                 <otherwise> M.MOVI_NAME LIKE #{name}</otherwise>
             </choose>
     </select>
-
-
     <select id = "searchMovie" parameterType="MovieSearchCriteria" resultType="MovieListInfoDto">
         SELECT B.RNUM, B.MOVI_ID, B.MOVI_NAME, B.AVAI_AGE, B.OPEN_DATE, B.RATING, B.ACCU_AUDIENCE, B.IMAGE
         FROM (
@@ -175,7 +171,29 @@
         WHERE B.RNUM > (#{page}-1)*#{amount} ]]>
     </select>
 
-    <!-- [영화 삽입] -->
+    <!--[영화의 관람평을 조회한다.]-->
+    <select id="countReviewList" parameterType="ReviewCriteria" resultType="Integer">
+        SELECT COUNT(MOVI_ID) FROM REVIEW
+    </select>
+    <!--리스트 조회(페이지)-->
+    <select id="selectReviewList" resultType="ReviewShortDto" parameterType="ReviewCriteria">
+        <![CDATA[
+        SELECT B.COMMENTS, B.RATING, B.USER_NAME
+        FROM (
+                 SELECT /*+index_desc(IDX_FAQ_PK)*/ ROWNUM AS RNUM, A.COMMENTS, A.RATING, A.USER_NAME
+                 FROM(
+                         SELECT COMMENTS, RATING, SUBSTR(U.USER_NAME,1,1)||'**' AS USER_NAME
+                         FROM REVIEW
+                                  INNER JOIN USERS U on REVIEW.USER_ID = U.USER_ID
+                         WHERE MOVI_ID = #{movi_id}
+                     ) A
+                 WHERE ROWNUM <= #{page}*#{amount}) B
+        WHERE B.RNUM > (#{page}-1)*#{amount}
+        ]]>
+    </select>
+
+
+    <!-- [영화를 추가한다.] -->
     <!-- 영화삽입  -->
     <insert id="insertMovie" parameterType="MovieVo">
         <selectKey keyProperty="movi_id" resultType="int" order="BEFORE">
@@ -190,43 +208,8 @@
                             )
     </insert>
 
-    <!-- [캐스팅 수정] -->
-    <!-- 캐스팅 삭제 -> 이후 INSERT  -->
-    <delete id="deleteCasting" parameterType="Integer">
-        DELETE FROM CAST WHERE MOVI_ID = #{movi_id}
-    </delete>
 
-    <!-- 캐스팅 삽입  -->
-    <update id="insertCasting">
-        INSERT ALL
-        <foreach item="cast" index="index" collection="casting" separator=" ">
-            INTO CAST VALUES(
-            #{movi_id}, ${cast.peop_id},
-            (SELECT P.PEOP_NAME FROM PEOPLE P WHERE P.PEOP_ID = ${cast.peop_id}),
-            ${cast.cast_type_code}
-        )
-        </foreach>
-        SELECT * FROM DUAL
-    </update>
-
-    <!-- [장르 수정] -->
-    <!-- 장르 삭제 -> 이후 INSERT -->
-    <delete id="deleteGenre" parameterType="Integer">
-        DELETE FROM MOVIEGENRE WHERE MOVI_ID = #{movi_id}
-    </delete>
-
-    <!-- 장르삽입  -->
-    <update id="insertGenre" parameterType="hashmap">
-        INSERT ALL
-        <foreach collection="genre" item="genre" index="index" separator=" ">
-            INTO MOVIEGENRE (MOVI_ID, GENRE_CODE) VALUES (${movi_id}, ${genre})
-        </foreach>
-        SELECT * FROM DUAL
-    </update>
-
-
-
-    <!-- [영화 수정] -->
+    <!-- [영화의 내용을 수정한다.] -->
     <update id="updateMovie" parameterType="MovieVo">
         UPDATE MOVIE M SET M.MOVI_NAME = #{movi_name},
                          M.AVAI_AGE_CODE = #{avai_age_code},
@@ -247,7 +230,7 @@
 
 
 
-    <!-- [영화 이미지 수정] -->
+    <!-- [영화의 이미지를 수정한다] -->
     <update id="updateMovieImage" parameterType="MovieVo">
         UPDATE MOVIE M SET M.IMAGE =
         <choose>
@@ -257,11 +240,45 @@
         WHERE MOVI_ID = #{movi_id}
     </update>
 
-    <!--[영화 삭제]-->
+    <!-- [영화의 출연진을 설정한다.] -->
+    <!-- 캐스팅 삭제 -> 이후 INSERT  -->
+    <delete id="deleteCasting" parameterType="Integer">
+        DELETE FROM CAST WHERE MOVI_ID = #{movi_id}
+    </delete>
+
+    <!-- 캐스팅 삽입  -->
+    <update id="insertCasting">
+        INSERT ALL
+        <foreach item="cast" index="index" collection="casting" separator=" ">
+            INTO CAST VALUES(
+            #{movi_id}, ${cast.peop_id},
+            (SELECT P.PEOP_NAME FROM PEOPLE P WHERE P.PEOP_ID = ${cast.peop_id}),
+            ${cast.cast_type_code}
+            )
+        </foreach>
+        SELECT * FROM DUAL
+    </update>
+
+    <!-- [영화별 장르를 설정한다.] -->
+    <!-- 장르 삭제 -> 이후 INSERT -->
+    <delete id="deleteGenre" parameterType="Integer">
+        DELETE FROM MOVIEGENRE WHERE MOVI_ID = #{movi_id}
+    </delete>
+
+    <!-- 장르삽입  -->
+    <update id="insertGenre" parameterType="hashmap">
+        INSERT ALL
+        <foreach collection="genre" item="genre" index="index" separator=" ">
+            INTO MOVIEGENRE (MOVI_ID, GENRE_CODE) VALUES (${movi_id}, ${genre})
+        </foreach>
+        SELECT * FROM DUAL
+    </update>
+
+
+    <!--[영화를 삭제한다.]-->
     <delete id="deleteMovie" parameterType="Integer">
         DELETE FROM MOVIE WHERE MOVI_ID = #{movi_id}
     </delete>
-
 
 
 

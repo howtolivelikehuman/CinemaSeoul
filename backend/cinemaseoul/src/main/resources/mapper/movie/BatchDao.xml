@@ -5,7 +5,7 @@
 
 <mapper namespace="com.uos.cinemaseoul.dao.movie.BatchDao">
 
-    <!--[관람객 합산 스케쥴러 프로세스]-->
+    <!--[전일의 영화별 관람객 수를 계산한다.]-->
     <!--해당일 상영 영화 확인-->
     <select id="getMovies" resultType="Integer">
         SELECT MOVI_ID FROM SHOWSCHEDULE WHERE SHOW_DATE = #{today}
@@ -34,7 +34,7 @@
             )
     </update>
 
-    <!--[매출 계산 스케쥴러 프로세스]-->
+    <!--[전일의 매출을 계산한다.]-->
     <!--존재여부 확인-->
     <select id="selectSales" resultType="SalesVo">
         SELECT SALE_DATE, MOVI_SALES, PROD_SALES, TOTA_SALES FROM SALES
@@ -76,16 +76,16 @@
         WHERE SALE_DATE = #{yesterday}
     </update>
 
-    <!--[등급 변경 스케쥴러 프로세스]-->
+    <!--[회원의 등급을 업데이트한다.]-->
     <update id="updateUserType"><![CDATA[
         UPDATE USERS SET USER_TYPE_CODE = #{user_type_code}
         WHERE ACCU_POINT >= #{accu_point}
         ]]></update>
 
+    <!--너무 많으므로 1000개씩 가져오기-->
     <select id="countList" resultType="Integer">
         SELECT COUNT(USER_ID) FROM USERS
     </select>
-    
     <select id="getUpdateTypeRecord" resultType="UserTypeRecordVo">
         SELECT B.USER_ID, B.ACCU_POINT, B.USER_TYPE_CODE
         FROM (
@@ -98,7 +98,6 @@
             <![CDATA[ WHERE ROWNUM  <= #{page}*#{amount}) B
         WHERE B.RNUM > (#{page}-1)*#{amount} ]]>
     </select>
-
     <!--등급변경 이력 삽입-->
     <insert id="batchInsertTypeRecord" parameterType="UserTypeRecordVo">
         INSERT ALL
@@ -109,7 +108,6 @@
         </foreach>
         SELECT * FROM DUAL
     </insert>
-
     <!--유저 누적 포인트 초기화-->
     <update id="resetUserPoint">
         UPDATE USERS SET ACCU_POINT = 0
@@ -148,6 +146,7 @@
         GROUP BY ROLLUP(SALE_DATE)
     </select>
 
+    <!--[회원 등급 변경 이력 조회]-->
     <select id="getUserTypeRecord" resultType="UserTypeRecordDto">
         SELECT UR.USER_ID, UR.UPDA_DATETIME, UR.ACCU_POINT, C.CODE_NAME AS USER_TYPE
         FROM USERTYPERECORD UR

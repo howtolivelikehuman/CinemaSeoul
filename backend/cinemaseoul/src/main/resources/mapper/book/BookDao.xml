@@ -5,7 +5,7 @@
 
 <mapper namespace="com.uos.cinemaseoul.dao.book.BookDao">
 
-    <!-- [개봉중인 영화 전부 조회]-->
+    <!-- [사용자가 예매 가능한 영화를 조회한다.]-->
     <select id="getBookAvailableMovie" resultType="MovieShortCutDto"><![CDATA[
         SELECT M.MOVI_ID, M.MOVI_NAME, (SELECT CODE_NAME FROM CODE WHERE CODE_ID = M.AVAI_AGE_CODE) FROM MOVIE M
         WHERE M.MOVI_ID IN (
@@ -15,7 +15,7 @@
         ]]>
     </select>
 
-    <!-- [해당 영화, 일자의 상영일정 조회]-->
+    <!-- [사용자가 예매 가능한 상영일정을 조회한다.]-->
     <select id="getScheduleFromMoviDate" resultType="ShowScheduleDto" parameterType="ScheduleAskDto">
         SELECT S.SHOW_ID, S.SHOW_DATE, S.SHOW_TIME,
                M.MOVI_NAME,
@@ -34,7 +34,7 @@
 
 
 
-    <!-- [상영일정 좌석 조회]-->
+    <!-- [이용자가 예매 가능한 상영일정의 좌석을 조회한다.]-->
     <!-- 상영관 가능좌석 조회-->
     <resultMap id="bookseatlist" type="BookSeatListDto">
         <id property="hall_id" column="HALL_ID"/>
@@ -61,7 +61,7 @@
     </select>
 
 
-    <!-- [예매 정보 조회]-->
+    <!-- [예매 세부정보를 확인한다.]-->
     <!--기본 정보 조회-->
     <select id="getBookInfo" resultType="BookDto">
         SELECT B.BOOK_ID, B.BOOK_PAY_ID, B.TEEN, B.ADULT, B.SENIOR, B.IMPAIRED, B.BOOK_DATETIME,
@@ -85,7 +85,7 @@
     </select>
 
 
-    <!-- [예매 정보 리스트 조회]-->
+    <!-- [ 예매 목록을 확인한다.]-->
     <!-- 페이지 수 -->
     <select id="countList" parameterType="BookSearchCriteria" resultType="Integer">
         SELECT COUNT(BOOK_ID) FROM BOOK B

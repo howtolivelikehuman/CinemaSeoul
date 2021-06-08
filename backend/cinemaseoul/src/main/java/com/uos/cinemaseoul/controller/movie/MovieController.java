@@ -1,22 +1,20 @@
 package com.uos.cinemaseoul.controller.movie;
 
-import com.uos.cinemaseoul.vo.common.CodeVo;
 import com.uos.cinemaseoul.common.constatnt.ConstantTable;
 import com.uos.cinemaseoul.common.paging.MovieCriteria;
 import com.uos.cinemaseoul.common.paging.MovieSearchCriteria;
+import com.uos.cinemaseoul.common.paging.ReviewCriteria;
 import com.uos.cinemaseoul.dto.movie.*;
 import com.uos.cinemaseoul.service.movie.MovieService;
+import com.uos.cinemaseoul.vo.common.CodeVo;
 import com.uos.cinemaseoul.vo.movie.MovieVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/movie")
@@ -89,5 +87,11 @@ public class MovieController {
     public ResponseEntity<?> selectGenreList(){
         List<CodeVo> genre = constantTable.childMap.get("장르구분");
         return ResponseEntity.ok(genre);
+    }
+
+    @PostMapping("/review")
+    public ResponseEntity<?> selectReviewList(@RequestBody ReviewCriteria reviewCriteria){
+        return ResponseEntity.ok(movieService.getReview(reviewCriteria));
+
     }
 }

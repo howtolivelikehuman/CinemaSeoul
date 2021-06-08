@@ -63,7 +63,7 @@ public class UsersService  {
             usersDao.signUp(s);
             return s.getUser_id();
         }
-        //회원이었으면 회원 업그레이드
+        //비회원이었으면 회원 업그레이드
         else{
 
             if(vo.getUser_auth_code().equals("100001")) throw new DuplicateException("already member");

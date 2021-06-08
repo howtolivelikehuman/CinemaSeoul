@@ -26,11 +26,20 @@ public class ReviewService {
 
     @Transactional
     public void insertReview(ReviewDto reviewDto) {
-        ReviewVo vo = reviewMapper.insertintoReviewVoFromReviewDto(reviewDto);
-        reviewDao.insertReview(vo);
-        reviewDao.updateMovieRating(vo.getMovi_id());
-        pointService.updatePoint(reviewDto.getUser_id(), 100, POINT_CODE_ADD, "리뷰 작성으로 인한 포인트 지급!");
+        ReviewVo vo = reviewDao.selectReview(reviewDto.getUser_id(), reviewDto.getMovi_id());
+
+        if(vo != null){
+            updateReview(reviewDto);
+        }
+        else{
+            ReviewVo vo2 = reviewMapper.insertintoReviewVoFromReviewDto(reviewDto);
+            reviewDao.insertReview(vo2);
+            reviewDao.updateMovieRating(vo2.getMovi_id());
+            pointService.updatePoint(reviewDto.getUser_id(), 100, POINT_CODE_ADD, "리뷰 작성으로 인한 포인트 지급!");
+        }
     }
+
+
     @Transactional
     public void updateReview(ReviewDto reviewDto) {
         ReviewVo vo = reviewMapper.insertintoReviewVoFromReviewDto(reviewDto);
@@ -50,7 +59,8 @@ public class ReviewService {
         pointService.updatePoint(reviewDto.getUser_id(), 100, POINT_CODE_NOTADD, "리뷰 삭제로 인한 포인트 회수!");
     }
     @Transactional
-    public List<MovieReviewDto> getMyMovie(int user_id) {
+    public List<MovieReviewDto>
+    getMyMovie(int user_id) {
 
         List<MovieReviewDto> list = reviewDao.getMyMovie(user_id, PAY_STAT_FIN);
         if(list != null){

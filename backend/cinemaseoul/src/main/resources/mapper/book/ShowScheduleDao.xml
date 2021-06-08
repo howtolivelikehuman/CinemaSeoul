@@ -5,11 +5,13 @@
 
 <mapper namespace="com.uos.cinemaseoul.dao.book.ShowScheduleDao">
 
+    <!--[상영일정을 추가한다.]-->
     <insert id="insert" parameterType="ShowScheduleVo">
         INSERT INTO SHOWSCHEDULE (SHOW_ID, MOVI_ID, HALL_ID, SHOW_DATE, SHOW_TIME)
         VALUES (SEQ_SHOW.NEXTVAL, #{movi_id}, #{hall_id}, #{show_date}, #{show_time})
     </insert>
 
+    <!--상영일정을 수정한다.-->
     <update id="update" parameterType="ShowScheduleVo">
         UPDATE SHOWSCHEDULE SET MOVI_ID = #{movi_id},
                                 HALL_ID = #{hall_id},
@@ -18,10 +20,13 @@
         WHERE SHOW_ID =  #{show_id}
     </update>
 
+    <!--[상영일정을 삭제한다.]-->
     <delete id="delete">
         DELETE SHOWSCHEDULE WHERE SHOW_ID = #{show_id}
     </delete>
 
+
+    <!--[상영일정 목록을 조회한다.]-->
     <select id="countList" parameterType="ScheduleCriteria" resultType="Integer">
         SELECT COUNT(SHOW_ID) FROM SHOWSCHEDULE S
 
@@ -51,6 +56,7 @@
 
         </trim>
     </select>
+
 
     <select id="selectScheduleList" parameterType="ScheduleCriteria" resultType="ScheduleInfoDto">
         SELECT B.RNUM, B.SHOW_ID, B.MOVI_ID, B.MOVI_NAME, B.HALL_ID, B.HALL_NAME,
@@ -102,6 +108,8 @@
         SELECT COUNT(BOOK_ID) FROM BOOKSEAT WHERE SHOW_ID = #{show_id}
     </select>
 
+
+    <!--[상영일정의 예매존재여부를 확인한다.]-->
     <select id="checkBook" resultType="Integer">
         SELECT COUNT(BOOK_ID) FROM BOOK
         WHERE SHOW_ID = #{show_id}
@@ -121,6 +129,8 @@
         WHERE S.SHOW_ID = #{show_id}
     </select>
 
+
+    <!--[상영일정을 시작 처리 한다.]-->
     <update id="startShowScheduleState">
         UPDATE SHOWSCHEDULE SET STARTED = '1'
         WHERE SHOW_ID = #{show_id}
