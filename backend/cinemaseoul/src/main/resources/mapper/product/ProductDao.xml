@@ -5,7 +5,7 @@
 
 <mapper namespace="com.uos.cinemaseoul.dao.product.ProductDao">
 
-    <!--[상품 입력]-->
+    <!--[상품을 등록한다.]-->
     <insert id="insertProduct" parameterType="ProductVo">
         <selectKey keyProperty="prod_id" resultType="Integer" order="BEFORE">
             SELECT SEQ_PRODUCT.nextval FROM DUAL
@@ -19,7 +19,7 @@
         </choose>)
     </insert>
 
-    <!--[상품 수정]-->
+    <!--[상품 내용을 수정한다.]-->
     <update id="updateProduct" parameterType="ProductVo">
         UPDATE PRODUCT SET
                            PROD_NAME = #{prod_name},
@@ -30,7 +30,7 @@
         WHERE PROD_ID = #{prod_id}
     </update>
 
-    <!--[상품 이미지 수정]-->
+    <!--[상품 이미지를 수정한다.]-->
     <update id="updateProductImage" parameterType="ProductVo">
         UPDATE PRODUCT SET
                 <choose>
@@ -45,13 +45,13 @@
         DELETE PRODUCT WHERE PROD_ID = #{prod_id}
     </delete>
 
-    <!--[상품 조회]-->
+    <!--[상품 상세정보를 조회한다.]-->
     <select id="selectProduct" resultType="ProductVo">
         SELECT PROD_ID, PROD_NAME, PRICE, PROD_TYPE_CODE, LIMIT, PROD_CONTENTS, IMAGE FROM PRODUCT
         WHERE PROD_ID = #{prod_id}
     </select>
 
-    <!--[상품 리스트 조회]-->
+    <!--[상품 목록을 조회한다]-->
     <!--상품 수 계산-->
     <select id="countList" parameterType="ProductCriteria" resultType="Integer">
         SELECT COUNT(PROD_ID) FROM PRODUCT P

@@ -45,7 +45,7 @@ public class ConstantTable {
     public void init(){
         constantService.initCode();
         constantService.initMessage();
-        constantService.initCodeStat();
+        //constantService.initCodeStat();
     }
 
 

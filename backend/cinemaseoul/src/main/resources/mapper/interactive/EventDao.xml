@@ -29,7 +29,7 @@
     <update id="updateEventImage" parameterType="EventVo">
         UPDATE EVENT SET IMAGE =
         <choose>
-            <when test= "image != NULL"> #{image, jdbcType=BLOB} </when>
+            <when test= "image !=  null"> #{image, jdbcType=BLOB} </when>
             <otherwise> empty_blob() </otherwise>
         </choose>
         WHERE EVENT_ID = #{event_id}
