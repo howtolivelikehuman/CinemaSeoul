@@ -78,11 +78,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//Arrays.asList("http://localhost:8081","http://localhost:3000",
     //                "http://3.35.176.97:8081", "http://3.35.176.97:3000")
+    //List.of("*")
 
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8081","http://localhost:3000",
+                "http://3.35.229.230:8081", "http://3.35.229.230:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.setAllowedHeaders(Arrays.asList("TOKEN", "content-type", "filter"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

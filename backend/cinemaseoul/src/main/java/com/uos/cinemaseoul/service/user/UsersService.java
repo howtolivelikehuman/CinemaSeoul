@@ -74,9 +74,6 @@ public class UsersService  {
             usersDao.nonMemberUpgrade(usersVo);
             return usersVo.getUser_id();
         }
-
-
-
     }
 
     //비회원조회
