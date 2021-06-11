@@ -20,8 +20,11 @@ public class EventController {
     @RequestMapping(path = "/event/add", method = RequestMethod.POST, consumes = "multipart/form-data")
     public void addEvent(Authentication authentication,
                          @RequestPart("event") EventDto eventDto,
-                         @RequestPart(value = "image", required = false) MultipartFile image){
+                         @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
         eventDto.setAdmi_id(Integer.parseInt(authentication.getName()));
+        if(image != null){
+            eventDto.setImage(image.getBytes());
+        }
         eventService.addEvent(eventDto);
     }
 

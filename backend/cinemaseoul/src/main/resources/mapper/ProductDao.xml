@@ -31,12 +31,12 @@
     </update>
 
     <!--[상품 이미지를 수정한다.]-->
-    <update id="updateProductImage" parameterType="ProductVo">
-        UPDATE PRODUCT SET
-                <choose>
-                    <when test="image == null">DEFAULT</when>
-                    <otherwise>Image =#{image, jdbcType=BLOB}</otherwise>
-                </choose>
+    <update id="updateImageProduct" parameterType="ProductVo">
+        UPDATE PRODUCT SET IMAGE =
+            <choose>
+                <when test= "image != null"> #{image, jdbcType=BLOB} </when>
+                <otherwise> empty_blob() </otherwise>
+            </choose>
         WHERE PROD_ID = #{prod_id}
     </update>
 

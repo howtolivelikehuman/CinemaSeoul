@@ -20,7 +20,7 @@ public class ProductController {
 
     @RequestMapping(path = "/prod",  method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<?> AddProduct(@RequestPart(name = "product") ProductDto dto,
-                                        @RequestPart(name = "image", required = false)MultipartFile image) throws IOException {
+                                        @RequestPart(name = "image", required = false) MultipartFile image) throws IOException {
         if(image != null){
             dto.setImage(image.getBytes());
         }

@@ -18,11 +18,12 @@
         WHERE P.PEOP_ID = #{peop_id}
     </select>
     <select id="getCastMovies" resultType="CastingMovieDto">
-        SELECT M.MOVI_ID, M.MOVI_NAME
+        SELECT DISTINCT M.MOVI_ID, M.MOVI_NAME
         FROM MOVIE M
         LEFT OUTER JOIN CAST C on M.MOVI_ID = C.MOVI_ID
         WHERE C.PEOP_ID = #{peop_id}
     </select>
+
     <!-- [인물 목록을 조회한다.]-->
     <select id="countList" resultType="Integer">
         SELECT COUNT(PEOP_ID) FROM PEOPLE

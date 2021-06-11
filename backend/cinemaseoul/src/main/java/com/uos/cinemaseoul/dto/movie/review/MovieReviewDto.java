@@ -15,6 +15,6 @@ public class MovieReviewDto {
     private int movi_id;
     private String movi_name;
     @JsonIgnore
-    private byte[] images;
+    private byte[] image;
     private String imageBase64;
 }

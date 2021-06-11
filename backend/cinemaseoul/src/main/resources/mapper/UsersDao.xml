@@ -15,22 +15,24 @@
         WHERE USER_ID = #{user_id}
     </select>
 
+    <!--[회원 번호 조회]-->
     <select id="findByPhone" resultType="UsersVo">
         SELECT USER_ID, PHONE_NUM, PASSWORD, USER_AUTH_CODE FROM USERS
         WHERE PHONE_NUM = #{phone_num}
     </select>
 
+    <!--[회원 이메일, 번호 조회]-->
     <select id="findByEmailAndPhone" resultType="String">
         SELECT USER_ID FROM USERS
         WHERE EMAIL = #{email} or PHONE_NUM = #{phone_num}
     </select>
 
-    <!--회원 아이디찾기-->
+    <!--[회원 아이디찾기]-->
     <select id="findByPhoneAndName" parameterType="UsersVo" resultType="String">
         SELECT EMAIL FROM USERS
         WHERE  PHONE_NUM = #{phone_num} AND USER_NAME = #{user_name}
     </select>
-
+    <!--[회원가입]-->
     <insert id="signUp" parameterType="UsersVo">
         <selectKey keyProperty="user_id" resultType="Integer" order="BEFORE">
             SELECT SEQ_USERS.nextval FROM DUAL
@@ -40,6 +42,7 @@
         VALUES (#{user_id}, #{user_name}, #{birth}, #{phone_num}, #{email}, #{password}, #{agreement}, 0, 0, #{user_auth_code})
     </insert>
 
+    <!--[비회원로그인]-->
     <insert id="nonMemberSignUp" parameterType="UsersVo">
         <selectKey keyProperty="user_id" resultType="Integer" order="BEFORE">
             SELECT SEQ_USERS.nextval FROM DUAL
@@ -49,6 +52,7 @@
         VALUES (#{user_id}, #{user_name}, #{phone_num}, #{password}, #{agreement})
     </insert>
 
+    <!--비회원 -> 회원 -->
     <update id="nonMemberUpgrade" parameterType="UsersVo">
         UPDATE USERS SET USER_NAME = #{user_name},
                          BIRTH = #{birth},
@@ -61,6 +65,7 @@
         WHERE USER_ID = #{user_id}
     </update>
 
+    <!--[회원 조회]-->
     <select id="selectById" parameterType="Integer" resultType="UserInfoDto">
         SELECT USER_ID, USER_NAME, BIRTH, PHONE_NUM, EMAIL, PASSWORD, AGREEMENT, CURR_POINT, ACCU_POINT,
                (SELECT CODE_NAME FROM CODE WHERE CODE.CODE_ID = USERS.USER_TYPE_CODE) USER_TYPE

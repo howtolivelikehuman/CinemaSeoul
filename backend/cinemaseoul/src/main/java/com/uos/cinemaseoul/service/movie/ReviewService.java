@@ -59,14 +59,13 @@ public class ReviewService {
         pointService.updatePoint(reviewDto.getUser_id(), 100, POINT_CODE_NOTADD, "리뷰 삭제로 인한 포인트 회수!");
     }
     @Transactional
-    public List<MovieReviewDto>
-    getMyMovie(int user_id) {
+    public List<MovieReviewDto> getMyMovie(int user_id) {
 
         List<MovieReviewDto> list = reviewDao.getMyMovie(user_id, PAY_STAT_FIN);
         if(list != null){
             for(MovieReviewDto mv : list){
-                if(mv.getImages() != null){
-                    mv.setImageBase64(Base64.encodeBase64String(mv.getImages()));
+                if(mv.getImage() != null){
+                    mv.setImageBase64(Base64.encodeBase64String(mv.getImage()));
                 }
             }
         }
