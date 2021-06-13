@@ -43,7 +43,7 @@
     <!--취소를 위한 정보-->
     <select id="getCancelInfo" resultType="BookPayVo">
         SELECT BP.BOOK_PAY_ID, BP.USER_ID, BP.ACCU_POINT, BP.PAY_STATE_CODE, BP.USE_POINT FROM BOOKPAY BP
-        WHERE BP.BOOK_PAY_ID = #{book_id}
+        WHERE BP.BOOK_PAY_ID = #{book_pay_id}
     </select>
     <update id="setCancel">
         UPDATE BOOKPAY SET PAY_STATE_CODE = #{pay_state_cancel}

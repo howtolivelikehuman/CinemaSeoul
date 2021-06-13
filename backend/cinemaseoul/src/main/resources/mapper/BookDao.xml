@@ -154,7 +154,7 @@
 
     <!--[예매 취소]-->
     <delete id="cancel" parameterType="Integer">
-        DELETE BOOK WHERE BOOK_ID = #{book_id}
+        DELETE BOOK WHERE BOOK_PAY_ID = #{book_pay_id}
     </delete>
 
 </mapper>

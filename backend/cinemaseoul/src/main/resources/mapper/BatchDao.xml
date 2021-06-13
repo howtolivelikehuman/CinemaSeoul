@@ -8,7 +8,7 @@
     <!--[전일의 영화별 관람객 수를 계산한다.]-->
     <!--해당일 상영 영화 확인-->
     <select id="getMovies" resultType="Integer">
-        SELECT MOVI_ID FROM SHOWSCHEDULE WHERE SHOW_DATE = #{today}
+        SELECT MOVI_ID FROM SHOWSCHEDULE WHERE SHOW_DATE = #{yesterday}
     </select>
     <!--영화별 관객 계산 -->
     <insert id="insertAudience" parameterType="Map">

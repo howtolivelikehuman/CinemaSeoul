@@ -131,8 +131,8 @@
 
                          ORDER BY
                          <choose>
-                             <when test="sort eq 1"> RATING </when>
-                             <when test="sort eq 2"> ACCU_AUDIENCE </when>
+                             <when test="sort eq 1"> RATING DESC</when>
+                             <when test="sort eq 2"> ACCU_AUDIENCE DESC</when>
                              <otherwise>MOVI_ID</otherwise>
                          </choose>
                          ) A

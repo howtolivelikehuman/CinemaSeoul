@@ -26,7 +26,7 @@ public interface BookDao {
     int[] getMyBookedSeat(int book_id);
 
     //예매 취소
-    void cancel(int book_id);
+    void cancel(int book_pay_id);
 
     //예매내역 조회
     int countList(BookSearchCriteria bookSearchCriteria);

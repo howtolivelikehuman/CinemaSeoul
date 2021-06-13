@@ -20,7 +20,7 @@ public interface BookPayDao {
     void insertBookSeats(List<BookSeatDto> seatDtos);
 
     //취소정보 -> 취소로 변경
-    BookPayVo getCancelInfo(int book_id);
+    BookPayVo getCancelInfo(int book_pay_id);
     void setCancel(int book_pay_id, String pay_state_cancel);
 
     //코드 사용
