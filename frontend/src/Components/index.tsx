@@ -1,5 +1,15 @@
-export { default as Component } from './Component';
 export { default as Header } from './Header';
 export { default as AdminHeader } from './AdminHeader';
 export { default as Layout } from './Layout';
 export { default as AdminLayout } from './AdminLayout';
+export { default as MovieCard } from './MovieCard';
+export { default as PageTitle } from './PageTitle';
+export { default as SelectModule } from './SelectModule';
+export { default as SearchTab } from './SearchTab';
+export { default as ModalComponent } from './ModalComponent';
+export { default as ExactMovie } from './ExactMovie';
+export { default as ProductCard } from './ProductCard';
+export { default as Cart } from './Cart';
+export { default as BookComponent } from './BookComponent';
+export { default as PayComponent } from './PayComponent';
+export { default as ImgComponent } from './ImgComponent';

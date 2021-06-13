@@ -1,0 +1,70 @@
+@import "../base/variable";
+@import "../base/reset";
+@import "../base/mixin";
+@import "../base/font";
+
+.movie-card{
+	display: flex;
+	flex-direction: column;
+    width: 200px;
+    height: 300px;
+	align-items: center;
+	margin-bottom: 2rem;
+	margin-right: 1rem;
+	.movie-poster{
+		height: 80%;
+		width: 100%;
+		border-radius: 1rem;
+		box-shadow: 0 0 5px $border-color;
+		margin-bottom: 10px;
+		overflow: hidden;
+		img{
+			border-radius: 1rem;
+			width: 100%;
+			max-height: fit-content;
+		}
+		.age-circle{
+			position: absolute;
+			z-index: 1;
+			top: 5px;
+			right: 5px;
+			border-radius: 30rem;
+			padding: 0;
+			width: 30px;
+			background-color: #e03c3c;
+			height: 30px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-weight: 600;
+			font-size: 13px;
+		}
+	}
+	.movie-name{
+		height: 5%;
+		font-weight: 600;
+		margin-bottom: 10px;
+	}
+	.info-con{
+		height: 15%;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		&>div{
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 5px;
+		}
+		.rating{
+			margin-right: 10px;
+		}
+		.rating, .open-date, .audience{
+			background-color: $border-color;
+			border-radius: 8px;
+			padding: 5px 10px;
+		}
+		.open-date{
+			background-color: $highlight;
+		}
+	}
+}

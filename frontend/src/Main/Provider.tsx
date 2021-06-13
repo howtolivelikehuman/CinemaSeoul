@@ -1,17 +1,31 @@
 import React from 'react';
+import { Router } from './Router';
+import { UserContextProvider } from './UserModel';
+import { MovieListContextProvider } from './MovieListModel';
+import { ShowScheduleListContextProvider } from './ShowScheduleModel';
+import { HallListContextProvider } from './HallListModel';
+import { TokenContextProvider } from './TokenModel';
+import { CodeContextProvider } from './CodeModel';
+import { CartSyncContextProvider } from './CartSync';
 
-import { LogicProvider } from './ViewModel';
-import { PracticeContextProvider } from './Model/PracticeModel';
-import Router from './Router';
-
-const Provider : React.FC = () => {
+const Provider: React.FC = () => {
 	const a = 1;
 	return (
-		<PracticeContextProvider>
-			<LogicProvider>
-				<Router />
-			</LogicProvider>
-		</PracticeContextProvider>
+		<TokenContextProvider>
+			<CodeContextProvider>
+				<UserContextProvider>
+					<MovieListContextProvider>
+						<ShowScheduleListContextProvider>
+							<HallListContextProvider>
+								<CartSyncContextProvider>
+									<Router />
+								</CartSyncContextProvider>
+							</HallListContextProvider>
+						</ShowScheduleListContextProvider>
+					</MovieListContextProvider>
+				</UserContextProvider>
+			</CodeContextProvider>
+		</TokenContextProvider>
 	);
 };
 

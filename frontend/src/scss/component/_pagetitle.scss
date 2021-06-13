@@ -1,0 +1,15 @@
+.page-title{
+	font-size: 1.5rem;
+	font-weight: 600;
+	border-bottom: 1px solid lightgray;
+	width: 100%;
+	padding: 10px 0 10px 10px;
+	margin-bottom: 10px;
+	display: flex;
+	&>div{
+		display: flex;
+	}
+	.back-arrow{
+		margin-right: 10px;
+	}
+}

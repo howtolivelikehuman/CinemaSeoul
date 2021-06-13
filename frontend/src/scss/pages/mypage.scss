@@ -1,0 +1,191 @@
+.mypage-con{
+	.pointer-con{
+		display: flex;
+		flex-direction: column;
+		.table-title{
+			font-weight: bold;
+			text-align: center;
+			font-size: 0.95rem;
+		}
+		.table-content{
+			text-align: center;
+		}
+		.pointer-record-con{
+			width: 100%;
+			display: flex;
+			justify-content: flex-end;
+			.pointer-record{
+				margin-top: 10px;
+				margin-bottom: 20px;
+				.pointer-btn{
+					margin-left: 5px;
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+	.MuiTabs-flexContainer>button {
+    	width: 20%;
+		.MuiTab-wrapper{
+			font-size : 1.2rem!important;
+		}
+	}
+	.user-book-con{
+		display: flex;
+		flex-direction: column;
+		.select-date-con{
+			margin-top: 20px;
+			&>*{
+				margin-right: 10px;
+				margin-top: 7px;
+			}
+			&>div{
+				font-weight: bold;
+			}
+			&>button{
+				margin-top: 2%;
+			}
+		}
+		.table-title{ //이거 안먹음
+			font-weight: bold;
+			font-size: 0.95rem;
+		}
+	}
+	.user-pay-con{
+		display: flex;
+		flex-direction: column;
+		.select-date-con{
+			margin-top: 15px;
+			&>*{
+				margin-right: 10px;
+				margin-top: 7px;
+			}
+			&>div{
+				font-weight: bold;
+			}
+			&>button{
+				margin-top: 2%;
+			}
+		}
+		&>div{
+			margin-top: 15px;
+		}
+		.product-obj{ //이거 안먹음 ㅅㅂ..
+			.product-name{
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+
+.mypage-movie-con{
+	display: flex;
+	flex-wrap: wrap;
+	.mypage-movie-card{
+		width: 240px;
+		height: 380px;
+		margin-right: 20px;
+		display: flex;
+		flex-direction: column;
+		padding: 20px;
+		align-items: center;
+		.img-con{
+			overflow-y: hidden;
+			margin-bottom: 10px;
+			img{
+				width: 100%;
+			}
+		}
+		.info-con{
+			.name{
+				font-size: 1.2rem;
+				font-weight: 600;
+				margin-bottom: 10px;
+			}
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+}
+
+.mypage-info-con{
+	display: flex;
+	justify-content: space-between;
+	&>div{
+		width: 48%;
+	}
+}
+
+.mypage-ask-con{
+	.mypage-tab{
+		margin-bottom: 20px;
+	}
+}
+
+/* 포인트/등급 내역 조회 modal */
+.point-record-modal{
+	margin-top: 15px;
+	.record-search{
+		margin : 3px;
+	}
+	.bold-text{
+		font-weight: bold;
+		font-size: 0.95rem;
+	}
+}
+
+.modal-content{
+	width: 100%;
+	.modal-column-con{
+		display: flex;
+		flex-direction: column;
+		.contents{
+			margin-top: 15px;
+		}
+		&.exact-ask{
+			div{
+				color: black;
+			}
+			.MuiInputBase-root{
+				width: 100%;
+				div{
+					width: 100%;
+				}
+			}
+			&>div{
+				margin-bottom: 10px;
+				display: flex;
+				align-items: center;
+			}
+			span{
+				flex-shrink: 0;
+				padding: 5px 10px;
+				border-radius: 10px;
+				background-color: lightgray;
+				margin-right: 10px;
+			}
+		}
+	}
+	.rating{
+		width: 100%!important;
+		margin-top: 10px;
+	}
+}
+.content-con{
+    margin-top: 20px;
+}
+.book-exact-modal{
+	&>div{
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+	span{
+		padding: 5px 10px;
+		background-color: lightgray;
+		border-radius: 10px;
+		margin-right: 5px;
+	}
+}

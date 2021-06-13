@@ -1,0 +1,91 @@
+@import "../base/variable";
+
+.movie-wrap{
+  display: flex;
+	flex-direction: column;
+	.movie-con{
+		display: flex;
+	}
+	.stat-sort-con{
+		width: 25%;
+		padding: 0 1rem;
+		border-right: 1px solid $border-color;
+		p{
+			text-align: center;
+			font-size: 1.3rem;
+			margin-bottom: 10px;
+			margin-top: 10px;
+			font-weight: 600;
+		}
+		.title{
+			font-weight: 600;
+			width: 100%;
+			padding: 10px 0;
+			margin-bottom: 1rem;
+			border-bottom: 1px solid $border-color;
+			p{
+				text-align: center;
+				font-size: 1.3rem;
+				margin-bottom: 10px;
+			}
+			button{
+				width: 100%;
+				background-color: $red;
+				color: white;
+			}
+		}
+	}
+	.movie-content-con{
+		display: flex;
+		flex-direction: column;
+		width: 75%;
+		padding: 15px;
+		.movie-menu{
+			display: flex;
+			justify-content: flex-end;
+			width: 100%;
+			padding-bottom: 20px;
+		}
+		.movie-list-con{
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+			justify-content: space-between;
+			.movie-list{
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.pagination{
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-top: 5%;
+				margin-bottom:2%;
+			}
+		}
+	}
+	
+}
+
+/* add modal */
+.add-container{
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+	&>div{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 1rem;
+		&>*{
+			width: 48%;
+		}
+		&>div{
+			display: flex;
+			flex-direction: column;
+			&>*{
+				margin-bottom: 1rem;
+			}
+		}
+	}
+}

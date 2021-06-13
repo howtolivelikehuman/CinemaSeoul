@@ -1,0 +1,24 @@
+.modal-content{
+.ask-answer-con{
+  display: flex;
+  flex-direction: column;
+  &>div{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    span{
+      padding: 5px 10px;
+      border-radius: 10px;
+      background-color: lightgray;
+      margin-right: 10px;
+    }
+  }
+  .answer{
+    align-items: flex-start;
+    margin-top: 15px;
+    .MuiInputBase-root{
+      width: 100%!important;
+    }
+  }
+}
+}
