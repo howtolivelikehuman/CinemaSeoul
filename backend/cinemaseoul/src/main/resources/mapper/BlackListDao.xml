@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uos.cinemaseoul.dao.user.BlackListDao">
+
+    <!--블랙리스트 추가-->
+    <insert id="insert" parameterType="BlackListVo" >
+        INSERT INTO BLACKLIST (BLAC_NAME, PHONE_NUM, BIRTH)
+        VALUES (#{blac_name}, #{phone_num}, #{birth})
+    </insert>
+
+    <select id="select" resultType="BlackListVo">
+        SELECT BLAC_NAME, PHONE_NUM, BIRTH FROM BLACKLIST
+        WHERE PHONE_NUM = #{phone_num}
+    </select>
+
+    <delete id="delete" parameterType="BlackListVo">
+        DELETE FROM BLACKLIST
+        WHERE PHONE_NUM = #{phone_num}
+    </delete>
+
+    <select id="selectList" resultType="BlackListVo">
+        SELECT BLAC_NAME, PHONE_NUM, BIRTH FROM BLACKLIST
+    </select>
+
+    <insert id="update" parameterType="BlackListVo" >
+        UPDATE BLACKLIST SET
+            BLAC_NAME = #{blac_name},
+            PHONE_NUM = #{phone_num},
+            BIRTH = #{birth}
+    </insert>
+
+</mapper>
