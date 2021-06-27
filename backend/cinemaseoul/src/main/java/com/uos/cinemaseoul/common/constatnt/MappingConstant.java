@@ -56,6 +56,8 @@ public class MappingConstant {
 
             "/point/select/{user_id}",
 
+            "/user/{user_id}",
+
             "/pay/book",
             "/pay/product",
             "/showschedule/select/{show_id}"
@@ -64,7 +66,6 @@ public class MappingConstant {
     //1 (회원 가능)
     public static String[] User = {
             "/user",
-            "/user/{user_id}",
             "/user/update",
 
             "/review",

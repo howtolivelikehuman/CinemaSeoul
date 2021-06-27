@@ -38,8 +38,8 @@
             SELECT SEQ_USERS.nextval FROM DUAL
         </selectKey>
 
-        INSERT INTO USERS (USER_ID, USER_NAME, BIRTH, PHONE_NUM, EMAIL, PASSWORD, AGREEMENT, CURR_POINT, ACCU_POINT, USER_AUTH_CODE)
-        VALUES (#{user_id}, #{user_name}, #{birth}, #{phone_num}, #{email}, #{password}, #{agreement}, 0, 0, #{user_auth_code})
+        INSERT INTO USERS (USER_ID, USER_NAME, BIRTH, PHONE_NUM, EMAIL, PASSWORD, AGREEMENT, USER_AUTH_CODE)
+        VALUES (#{user_id}, #{user_name}, #{birth}, #{phone_num}, #{email}, #{password}, #{agreement}, #{user_auth_code})
     </insert>
 
     <!--[비회원로그인]-->
