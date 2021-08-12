@@ -3,13 +3,11 @@ server:
 
 spring :
   datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@3.35.229.230:1521/xe
-    #driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    #url: jdbc:log4jdbc:oracle:thin:@3.35.229.230:1521/xe
+    driver-class-name:
+    url: 
 
-    username: root
-    password: 1234
+    username: 
+    password: 
 
   servlet:
     multipart:
