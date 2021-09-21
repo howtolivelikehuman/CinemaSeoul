@@ -1,7 +1,7 @@
 # CinemaSeoul
 DB 설계 교과목 영화 사이트 만들기 팀프로젝트
 
-~~Available at -> http://3.35.229.230/~~ currently stopped
+~~Available at -> http://3.35.229.230/~~ Currently Unavailable
 
 ## Result
 ![movie](https://user-images.githubusercontent.com/63439738/123550574-22e7e600-d7a9-11eb-9fc1-8b48b6ad1b28.gif)
